@@ -130,7 +130,7 @@
       <div class="row" style="margin-top: 2em; margin-bottom: 3em;">
         <div class="col-lg-8 ml-auto mr-auto">
           <h2 id="introduction">Introduction</h2>
-          <p>If you're like me you're probably a little tired of the default <a href="http://getbootstrap.com">Bootstrap</a> look that my amazing back-end developer colleagues like to use thick and fast &#x1F44B;. I've come to a point in my life where I needed to spice it up a little &#x1F389;, so I made these dropdowns for them, but also for you...</p>
+          <p>If you're like me you're probably a little tired of the default <a href="http://getbootstrap.com">Bootstrap</a> look that your amazing back-end developer colleagues like to use thick and fast &#x1F44B;. I've come to a point in my life where I needed to spice it up a little &#x1F389;, so I made these dropdowns for them, but also for you...</p>
           <p>It's not perfect code in any way, but works for me, and I've focused to make it as accessible as I can. Should work just as well for mouse/hover, touch, keyboard and screen reader use... and actually without Bootstrap as well &#x1F631;. I want to learn and get better though, so please let me know (via <a href="https://github.com/dermike/better-bootstrap-dropdowns/issues">GitHub issues</a> e.g.) if you disagree with something.</p>
           <p>Before we get started I just want to clarify that "better" in this case means better for me, not necessarily for you... let's go! &#x1F697;</p>
 
@@ -146,20 +146,20 @@
       &lt;li&gt;
         &lt;a href="/link-2"&gt;Dropdown 2&lt;/a&gt;
       &lt;/li&gt;
-      <i>... more dropdown items</i>
+      &lt;!-- ... more dropdown items --&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
-  <i>... more menu items</i>
+  &lt;!-- ... more menu items --&gt;
 &lt;/ul&gt;</code></pre>
           <p>Put a <code>.bb-dropdowns</code> class on a <code>ul</code> and then the submenu dropdown list next to the <code>a</code> link in each <code>li</code></p>
           <p>To make it into the actual dropdowns, you need to initialize the script like this:</p>
           <pre><code class="js">var dropdowns = new BbDropdowns();
 dropdowns.init();</code></pre>
-          <p>After that's done the markup has been touched up a little to use the needed CSS and to support screen readers and keyboard navigation. Users can now navigate by tabbing to each menu, open it with ESC, SPACE or ARROW DOWN. Once in the submenu, it supports DOWN and UP ARROW to navigate. LEFT and RIGHT ARROW closes the menu and goes to the next one if there is one available.</p>
+          <p>After that's done the markup has been touched up a little to use the needed CSS and to support screen readers and keyboard navigation. Users can now navigate by tabbing to each menu, open it with ENTER, SPACE or &#x2B07;. Once in the submenu, it supports ESC to close, &#x2B07; and &#x2B06; to navigate. &#x2B05; and &#x27A1; close the menu and goes to the next one if there is one available.</p>
           <p>Add <code>data-clickonly="true"</code> to the menu item link disable hover and require click or tap to toggle the menu.</p>
 
           <h2 id="select">Select box</h2>
-          <p>The following code example creates a select box after running <code>.init()</code>. Add <code>aria-select="true"</code> to the first level link. The link text will act as a label for the select box. If any option should be pre-selected, put <code>aria-checked="true"</code> on that item.</p>
+          <p>The following code example creates a select box after running <code>.init()</code>. Add <code>data-select="true"</code> to the first level link. The link text will act as a label for the select box. If any option should be pre-selected, put <code>aria-checked="true"</code> on that item.</p>
           <pre><code class="html">&lt;ul class="bb-dropdowns"&gt;
   &lt;li&gt;
     &lt;a href="#" class="btn btn-danger" data-select="true"&gt;Select something&lt;/a&gt;
