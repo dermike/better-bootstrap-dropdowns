@@ -146,6 +146,7 @@
             nextItem.firstElementChild.focus();
           }
         } else if (e.keyCode === 13 || e.keyCode === 32 || e.type === 'click' && e.target.tagName === 'A') {
+          // This is to make anchor links work, otherwise the menu will not close
           if (openMenu.getAttribute('data-select') === 'true') {
             e.preventDefault();
             setSelectItem(e, openMenu); 
