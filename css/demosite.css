@@ -199,5 +199,5 @@ a, a:hover {
   bottom: 0;
   left: 0;
   animation-name: ripple-out;
-  animation-duration: 1s;
+  animation-duration: .7s;
 }
