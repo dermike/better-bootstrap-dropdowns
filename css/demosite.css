@@ -176,3 +176,31 @@ a, a:hover {
     transform: translateY(-100px);
   }
 }
+
+@keyframes ripple-out {
+  100% {
+    top: -12px;
+    right: -12px;
+    bottom: -12px;
+    left: -12px;
+    opacity: 0;
+  }
+}
+
+.ripple-out {
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px transparent;
+  position: relative;
+}
+
+.ripple-out:before {
+  content: '';
+  position: absolute;
+  border: #2b7d98 solid 6px;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  animation-name: ripple-out;
+  animation-duration: 1s;
+}
