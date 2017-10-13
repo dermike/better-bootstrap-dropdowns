@@ -3,11 +3,11 @@ body {
 }
 
 h2 {
-  margin-bottom: .75em;
+  margin: .75em 0;
 }
 
 h2:target {
-  padding-top: 100px;
+  padding-top: 110px;
 }
 
 .bg-light {
