@@ -246,11 +246,9 @@ selectbox.innerHTML('&lt;li&gt;&lt;a href="#" data-value="example"&gt;Example op
           message = document.querySelector('.message'),
           randomStart = ['Wow!', 'Cool! &#x1F60E;', 'Awesome!', 'Super!', 'High five! &#x270B;'],
           randomEnd = ['I love', 'I like', 'I prefer', 'I enjoy'];
+        message.style.display = 'none';
         overlay.style.visibility = 'visible';
         message.innerHTML = '<p>' + randomStart[Math.floor(Math.random() * randomStart.length)] + ' ' + randomEnd[Math.floor(Math.random() * randomEnd.length)] + ' ' + value + ' too!</p>';
-        // Display and hide immediately to avoid flicker
-        message.style.display = 'block';
-        message.style.display = 'none';
         setTimeout(function() {
           message.style.display = 'block';
           setTimeout(function() {
