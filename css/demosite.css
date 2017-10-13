@@ -11,7 +11,7 @@ h2:target {
 }
 
 .bg-light {
-  background-color: #f1f1f1 !important;
+  background-color: #f8f8f8 !important;
 }
 
 a, a:hover {
@@ -30,7 +30,7 @@ a, a:hover {
 }
 
 .jumbotron {
-  padding: 3rem 1.5rem;
+  padding: 2rem 1.5rem;
   margin-bottom: 0;
   background-color: #fff;
   text-align: left;
@@ -96,9 +96,11 @@ a, a:hover {
   .nav.bb-dropdowns {
     flex-grow: 0;
   }
+}
 
+@media (min-width: 767px) {
   .jumbotron {
-    padding: 6rem 3rem 3rem;
+    padding: 4rem 3rem 3rem;
     margin-bottom: 0;
     text-align: center;
   }
