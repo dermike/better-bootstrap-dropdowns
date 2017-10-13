@@ -79,8 +79,8 @@
   display: none;
   margin: 0;
   padding: 0;
-  left: 1em;
-  right: 1em;
+  left: 15px;
+  right: 15px;
   background: #fff;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
   z-index: 1000;
@@ -108,6 +108,10 @@ body.no-js .bb-dropdowns li > a:not([data-clickonly="true"]):hover + ul, body.no
 
 .bb-dropdowns .btn[aria-expanded="true"]:before {
   bottom: -1px;
+}
+
+.bb-dropdowns a.btn-lg + ul {
+  font-size: 1.25rem;
 }
 
 .bb-dropdowns [aria-expanded="true"]:before {
