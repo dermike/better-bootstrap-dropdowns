@@ -7,7 +7,7 @@ h2 {
 }
 
 h2:target {
-  padding-top: 110px;
+  padding-top: 120px;
 }
 
 .bg-light {
@@ -119,7 +119,7 @@ a, a:hover {
 }
 
 .message {
-  margin: 0.8em auto;
+  margin: 0.8em 1.2em;
   padding: 0.2em;
   border-radius: 8px;
   position: relative;
