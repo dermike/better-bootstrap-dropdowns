@@ -203,7 +203,13 @@
 
       calcMinWidth = function(cache) {
         cache.forEach(function(item) {
-          var menuWidth = item.offsetWidth;
+          var menuWidth,
+            isSelect = item.getAttribute('data-select') === 'true' ? true : false;
+          item.style.minWidth = null;
+          menuWidth = item.offsetWidth;
+          if (isSelect) {
+            item.style.minWidth = menuWidth + 'px';
+          }
           item.nextElementSibling.style.minWidth = menuWidth > 160 ? menuWidth + 'px' : null;
         });
       },
