@@ -69,11 +69,9 @@
       keyNavMenu = function(e) {
         var isSelect = e.target.getAttribute('data-select') === 'true' ? true : false,
           prevMenu;
-        if (e.keyCode === 32 || e.keyCode === 13 || e.keyCode === 40) {
+        if (e.keyCode === 32 || e.keyCode === 13 || e.keyCode === 40 || e.keyCode === 38) {
           e.preventDefault();
-          if (!isSelect || e.keyCode === 32) {
-            showSubmenu(e);
-          }
+          showSubmenu(e);
         } else if ((e.keyCode === 37 || e.keyCode === 39) && !isSelect) {
           e.preventDefault();
           prevMenu = e.keyCode === 37 ? e.target.parentElement.previousElementSibling : e.target.parentElement.nextElementSibling;
@@ -123,49 +121,13 @@
         }
       },
 
-      useSelectItem = function(e, menu) {
-        var openMenu = menu || document.querySelector('.bb-dropdowns > li > a[aria-expanded="true"]'),
-          prevItem,
-          nextItem;
-        if (e.keyCode === 27) {
-          e.preventDefault();
-          openMenu.click();
-          openMenu.focus();
-        } else if (e.keyCode === 9) {
-          e.preventDefault();
-        } else if (e.keyCode === 38) {
-          e.preventDefault();
-          prevItem = e.target.parentElement.previousElementSibling;
-          if (prevItem) {
-            prevItem.firstElementChild.focus();
-          }
-        } else if (e.keyCode === 40) {
-          e.preventDefault();
-          nextItem = e.target.parentElement.nextElementSibling;
-          if (nextItem) {
-            nextItem.firstElementChild.focus();
-          }
-        } else if (e.keyCode === 13 || e.keyCode === 32 || e.type === 'click' && e.target.tagName === 'A') {
-          // This is to make anchor links work, otherwise the menu will not close
-          if (openMenu.getAttribute('data-select') === 'true') {
-            e.preventDefault();
-            setSelectItem(e, openMenu); 
-          } else {
-            openMenu.click();
-          }
-        }
-      },
-
       keyNavSubmenu = function(e) {
         var openMenu = document.querySelector('.bb-dropdowns > li > a[aria-expanded="true"]'),
+          isSelect = e.target.getAttribute('role') === 'menuitemradio' ? true : false,
           prevItem,
           nextItem,
           prevMenu;
-        if (e.target.getAttribute('role') === 'menuitemradio') {
-          useSelectItem(e, openMenu);
-          return false;
-        }
-        if ((e.keyCode === 27 || e.keyCode === 32) && openMenu) {
+        if ((e.keyCode === 27 || (e.keyCode === 32 && !isSelect)) && openMenu) {
           e.preventDefault();
           openMenu.click();
           openMenu.focus();
@@ -181,12 +143,22 @@
           if (nextItem) {
             nextItem.firstElementChild.focus();
           }
-        } else if ((e.keyCode === 37 || e.keyCode === 39) && openMenu) {
+        } else if ((e.keyCode === 37 || e.keyCode === 39) && openMenu && !isSelect) {
           e.preventDefault();
           prevMenu = e.keyCode === 37 ? openMenu.parentElement.previousElementSibling : openMenu.parentElement.nextElementSibling;
           if (prevMenu) {
             openMenu.click();
             prevMenu.firstElementChild.focus();
+          }
+        } else if (isSelect && e.keyCode === 9) {
+          e.preventDefault();
+        } else if (e.keyCode === 13 || e.keyCode === 32 || e.type === 'click' && e.target.tagName === 'A' && openMenu) {
+          // This is to make anchor links work, otherwise the menu will not close
+          if (isSelect) {
+            e.preventDefault();
+            setSelectItem(e, openMenu);
+          } else {
+            openMenu.click();
           }
         }
         return true;
@@ -245,7 +217,7 @@
             item.addEventListener('keydown', keyNavMenu, false);
             subMenu.addEventListener('keydown', keyNavSubmenu, false);
             subMenu.addEventListener('focusout', tabbedOut, false);
-            subMenu.addEventListener('click', useSelectItem, false);
+            subMenu.addEventListener('click', keyNavSubmenu, false);
             subMenu.setAttribute('aria-label', item.textContent + (isSelect ? '' : ' submenu'));
             if (item.getAttribute('data-clickonly') === 'true' || isSelect) {
               clickOnly = true;
@@ -314,7 +286,7 @@
   if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
     module.exports = BbDropdowns;
   } else if (typeof define === 'function' && define.amd) {
-    define('Dropdowns', [], function() {
+    define('BbDropdowns', [], function() {
       return BbDropdowns;
     });
   } else if (typeof global === 'object') {
