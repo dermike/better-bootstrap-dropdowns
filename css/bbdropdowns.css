@@ -19,6 +19,7 @@
   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg fill='%23FFF' height='1em' viewBox='0 0 24 24' width='1em' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7.41 7.84L12 12.42l4.59-4.58L18 9.25l-6 6-6-6z'/%3E%3Cpath d='M0-.75h24v24H0z' fill='none'/%3E%3C/svg%3E");
   background-position: 100%;
   background-repeat: no-repeat;
+  background-size: 1em;
   vertical-align: middle;
 }
 
