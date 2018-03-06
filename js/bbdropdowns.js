@@ -6,15 +6,15 @@
     var fingerMove = false,
       self = this,
 
-      switchSelectText = function(menu) {
+      switchSelectText = function(menu, reset) {
         var labelText = menu.firstElementChild.textContent.split(',')[1].trim(),
           activeChoice = document.querySelector('#' + menu.getAttribute('aria-activedescendant'));
-        if (menu.getAttribute('aria-expanded') === 'true' || !activeChoice) {
+        if (menu.getAttribute('aria-expanded') === 'true' || !activeChoice || reset) {
           menu.firstChild.textContent = labelText;
         } else if (menu.getAttribute('aria-activedescendant')) {
           menu.firstChild.textContent = activeChoice.textContent;
         }
-        if (!activeChoice) {
+        if (!activeChoice || reset) {
           menu.removeAttribute('aria-activedescendant');
         }
       },
@@ -195,6 +195,23 @@
       });
 
     this.initialized = Boolean(menuCache.length);
+
+    this.resetSelect = function(select) {
+      var selectToReset = select ? document.querySelector(select) : null;
+      if (selectToReset) {
+        if (menuCache.indexOf(selectToReset) !== -1 && selectToReset.getAttribute('data-select') === 'true') {
+          switchSelectText(selectToReset, true);
+          selectToReset.removeAttribute('data-value');
+          Array.prototype.forEach.call(selectToReset.parentElement.querySelectorAll('li > a'), function(item) {
+            item.removeAttribute('aria-checked');
+          });
+        } else {
+          throw new Error('Element not initialized or not a select!');
+        }
+      } else {
+        throw new Error('Element could not be found!');
+      }
+    };
 
     this.init = function(observed) {
       var menuItems = observed ? [observed] : document.querySelectorAll('.bb-dropdowns > li > a'),
