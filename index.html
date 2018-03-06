@@ -190,6 +190,8 @@ dropdowns.init();</code></pre>
 });</code></pre>
           <p><b>Note</b> that you need to use <code>getAttribute('data-value')</code> and not <code>.value</code>. See how the first and second select box in the initial examples work together.</p>
           <p><b>Also note</b> that this solution will never be as accessible as a real <code>&lt;select&gt;</code> box, but it aspires to be good enough for when you need the looks.</p>
+          <p>If you need to reset a select box to it's initial unselected state, use <code>.resetSelect(selector)</code>. Example:</p>
+          <pre><code class="js">dropdowns.resetSelect('#my-select');</code></pre>
 
           <h2 id="button">Menu button</h2>
           <p>Combining some markup and attributes from the previous two use cases of <a href="https://github.com/dermike/better-bootstrap-dropdowns/tree/master/js">bbdropdowns.js</a> you can easily create a menu button (or a group of buttons) opening a dropdown of links like the third button in the examples up top. The <code>data-clickonly="true"</code> attribute ensures it only opens by clicking, tapping or keypressing it.</p>
