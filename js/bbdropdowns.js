@@ -100,7 +100,7 @@
           }
           item.removeAttribute('aria-checked');
         });
-        selectedId = 'selected-' + Date.now();
+        selectedId = 'selected-' + (Math.random() * new Date().getTime()).toString(36).replace(/\./g, '');
         submenu.blur();
         submenu.id = selectedId;
         submenu.setAttribute('aria-checked', 'true');
