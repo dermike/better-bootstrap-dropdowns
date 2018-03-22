@@ -53,10 +53,6 @@
   display: block;
 }
 
-.bb-dropdowns a[data-select="true"] .sr-only {
-  display: none;
-}
-
 .sr-only {
   position: absolute;
   width: 1px;
@@ -69,11 +65,6 @@
   clip-path: inset(50%);
   border: 0;
 }
-
-.bb-dropdowns a[aria-activedescendant] .sr-only {
-  display: block;
-}
-
 
 .bb-dropdowns a + ul {
   position: absolute;
