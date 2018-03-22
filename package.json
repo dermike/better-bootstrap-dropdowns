@@ -1,6 +1,6 @@
 {
   "name": "better-bootstrap-dropdowns",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "Accessible dropdowns for menus, select boxes and menu buttons that just work no matter if it's mouseover, keyboard navigation, screen reader or mobile. Bootstrap not required.",
   "main": "index.js",
   "scripts": {
