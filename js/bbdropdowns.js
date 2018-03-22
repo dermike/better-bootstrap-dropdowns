@@ -7,22 +7,20 @@
       self = this,
 
       switchSelectText = function(menu, reset) {
-        var labelText = menu.firstElementChild.textContent.split(',')[1].trim(),
-          activeChoice = document.querySelector('#' + menu.getAttribute('aria-activedescendant'));
+        var labelText = menu.nextElementSibling.getAttribute('aria-label'),
+          activeChoice = menu.parentElement.querySelector('[aria-checked="true"]');
         if (menu.getAttribute('aria-expanded') === 'true' || !activeChoice || reset) {
-          menu.firstChild.textContent = labelText;
-        } else if (menu.getAttribute('aria-activedescendant')) {
-          menu.firstChild.textContent = activeChoice.textContent;
-        }
-        if (!activeChoice || reset) {
-          menu.removeAttribute('aria-activedescendant');
+          menu.textContent = labelText;
+        } else if (activeChoice) {
+          menu.innerHTML = activeChoice.textContent + '<span class="sr-only">, ' + labelText + '</span>';
         }
       },
 
       showSubmenu = function(e) {
         var menu = e.target,
           subMenu = menu.nextElementSibling,
-          expanded = menu.getAttribute('aria-expanded') === 'true' ? true : false;
+          expanded = menu.getAttribute('aria-expanded') === 'true' ? true : false,
+          activeChoice = menu.parentElement.querySelector('[aria-checked="true"]');
         e.preventDefault();
         if (e.type !== 'click' && e.type !== 'keydown') {
           // Only toggle if event type is click/keypress
@@ -32,8 +30,8 @@
           menu.setAttribute('aria-expanded', expanded ? 'false' : 'true');
           subMenu.setAttribute('aria-hidden', expanded ? 'true' : 'false');
           if (e && e.keyCode && !expanded) {
-            if (e.target.getAttribute('aria-activedescendant')) {
-              document.getElementById(e.target.getAttribute('aria-activedescendant')).focus();
+            if (activeChoice) {
+              activeChoice.focus();
             } else {
               subMenu.querySelector('li:first-child a').focus();
             }
@@ -92,7 +90,6 @@
         var submenu = e ? e.target : setAsDefault,
           openMenu = menu,
           itemChanged = false,
-          selectedId,
           lastActive;
         Array.prototype.forEach.call(menu.parentElement.querySelectorAll('li > a'), function(item) {
           if (item.getAttribute('aria-checked') === 'true') {
@@ -100,14 +97,11 @@
           }
           item.removeAttribute('aria-checked');
         });
-        selectedId = 'selected-' + (Math.random() * new Date().getTime()).toString(36).replace(/\./g, '');
         submenu.blur();
-        submenu.id = selectedId;
         submenu.setAttribute('aria-checked', 'true');
         openMenu.setAttribute('data-value', submenu.getAttribute('data-value') ? submenu.getAttribute('data-value') : '');
-        openMenu.setAttribute('aria-activedescendant', selectedId);
-        if (!lastActive || lastActive !== submenu.firstChild.textContent) {
-          openMenu.firstChild.textContent = submenu.firstChild.textContent;
+        if (!lastActive || lastActive !== submenu.textContent) {
+          openMenu.textContent = submenu.textContent;
           itemChanged = true;
         }
         if (!setAsDefault) {
@@ -245,11 +239,11 @@
           }
           if (isSelect) {
             menuWidth = item.offsetWidth;
+            item.removeAttribute('data-value');
             item.parentElement.parentElement.setAttribute('role', 'presentation');
             item.style.minWidth = menuWidth + 'px';
             subMenu.setAttribute('role', 'menu');
             if (!observed) {
-              item.innerHTML = item.textContent + '<span class="sr-only">, ' + item.textContent + '</span>';
               // Observe changes to list items and re-initialize
               observer.observe(subMenu, observerConfig);
             }
